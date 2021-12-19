@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CONTROLLER BOARD</title>
+</head>
+<style>
+    html {
+        font-family: Arial;
+        display: inline-block;
+        text-align: center;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: hsl(175, 87%, 27%);
+        color: white;
+        font-size: 1.7rem;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .reading {
+        font-size: 2.8rem;
+    }
+
+    .packet {
+        color: #bebebe;
+    }
+
+    input:checked+.slider {
+        background-color: #2196f3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196f3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    /* Range slider*/
+    #slide-container {
+        width: 100%;
+        color: #2f4468;
+        /* Width of the outside container */
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgb(16, 112, 29);
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgb(150, 204, 79);
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div class="topnav">
+        <h3>4 AXIS ROBOT ARM CONTROLLER</h3>
+        <h4>DESIGNED BY TUAN ANH TRAN - PFIEV K62</h4>
+    </div>
+
+    <div class="slide-container">
+        <h1>LEFT - RIGHT</h1>
+        <input type="range" min="205" max="409" value="0" class="slider" id="dutyRange1">
+        <p>Duty cycle / 4095: <span id="duty1"></span></p>
+        <br>
+        <h1>UP - DOWN</h1>
+        <input type="range" min="0" max="100" value="0" class="slider" id="dutyRange2">
+        <p>Duty cycle /4095: <span id="duty2"></span>%</p>
+        <br>
+        <h1>BACKWARD - FORWARD</h1>
+        <input type="range" min="0" max="100" value="0" class="slider" id="dutyRange3">
+        <p>Duty cycle: <span id="duty3"></span>%</p>
+        <br>
+        <h1>OPEN - CLOSE HAND</h1>
+        <input type="range" min="0" max="100" value="0" class="slider" id="dutyRange4">
+        <p>Duty cycle: <span id="duty4"></span>%</p>
+    </div>
+</body>
+<script>
+    // servo 1
+var slider1 = document.getElementById("dutyRange1");
+var output1 = document.getElementById("duty1");
+output1.innerHTML = slider1.value;
+
+slider1.oninput = function () {
+    output1.innerHTML = (this.value *100 / 4095).toFixed(2);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/slider1?value=" + slider1.value, true);
+    xhr.send(slider1.value);
+}
+
+// servo 2
+var slider2 = document.getElementById("dutyRange2");
+var output2 = document.getElementById("duty2");
+output2.innerHTML = slider2.value;
+
+slider2.oninput = function () {
+    output2.innerHTML = this.value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/slider2?value=" + slider2.value, true);
+    xhr.send(slider2.value);
+}
+
+// servo 3
+var slider3 = document.getElementById("dutyRange3");
+var output3 = document.getElementById("duty3");
+output3.innerHTML = slider3.value;
+
+slider3.oninput = function () {
+    output3.innerHTML = this.value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/slider3?value=" + slider3.value, true);
+    xhr.send(slider3.value);
+}
+
+// servo 4
+var slider4 = document.getElementById("dutyRange4");
+var output4 = document.getElementById("duty4");
+output4.innerHTML = slider4.value;
+
+slider4.oninput = function () {
+    output4.innerHTML = this.value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/slider4?value=" + slider4.value, true);
+    xhr.send(slider4.value);
+}
+
+
+var xhttp = new XMLHttpRequest();
+setInterval(function () {
+    xhttp.open("GET", "/robot", true);
+    xhttp.send();
+}, 1000);// request 1 time / sec
+</script>
+</html>
