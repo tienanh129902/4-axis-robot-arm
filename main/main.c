@@ -18,7 +18,7 @@
 
 #define ESP_WIFI_SSID "ESP32 wifi"
 #define ESP_WIFI_PASS "12091999"
-#define MAX_STA_CONN 1
+#define MAX_STA_CONN 2
 
 static const char *TAG = "wifi softAP";
 
@@ -78,33 +78,36 @@ void slider1_data_callback(char *data, int len)
 {
     char number_str[10];
     memcpy(number_str, data, len + 1);
-    int duty = atoi(number_str);
-    printf("Servo 1 get duty %d\n", duty);
-    LedC_Set_Duty(1,duty);
+    int duty1 = atoi(number_str);
+    printf("Servo 1 get duty %d\n", duty1);
+    LedC_Set_Duty(1,duty1);
 }
 
 void slider2_data_callback(char *data, int len)
 {
     char number_str[10];
     memcpy(number_str, data, len + 1);
-    int duty = atoi(number_str);
-    printf("Servo 2 get duty %d\n", duty);
+    int duty2 = atoi(number_str);
+    printf("Servo 2 get duty %d\n", duty2);
+    LedC_Set_Duty(2,duty2);
 }
 
 void slider3_data_callback(char *data, int len)
 {
     char number_str[10];
     memcpy(number_str, data, len + 1);
-    int duty = atoi(number_str);
-    printf("Servo 3 get duty %d\n", duty);
+    int duty3 = atoi(number_str);
+    printf("Servo 3 get duty %d\n", duty3);
+    // LedC_Set_Duty(3,duty3);
 }
 
 void slider4_data_callback(char *data, int len)
 {
     char number_str[10];
     memcpy(number_str, data, len + 1);
-    int duty = atoi(number_str);
-    printf("Servo 4 get duty %d\n", duty);
+    int duty4 = atoi(number_str);
+    printf("Servo 4 get duty %d\n", duty4);
+    LedC_Set_Duty(4,duty4);
 }
 
 void page_load_call_back()
@@ -123,7 +126,7 @@ void app_main(void)
     LedC_Init(50);
     LedC_Add_Pin(13,1);
     LedC_Add_Pin(12,2);
-    LedC_Add_Pin(12,3);
+    // LedC_Add_Pin(1,3);
     LedC_Add_Pin(27,4);
 
     esp_err_t ret = nvs_flash_init();

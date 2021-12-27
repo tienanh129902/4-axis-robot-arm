@@ -111,30 +111,30 @@
 
     <div class="slide-container">
         <h1>LEFT - RIGHT</h1>
-        <input type="range" min="205" max="409" value="0" class="slider" id="dutyRange1">
-        <p>Duty cycle / 4095: <span id="duty1"></span></p>
+        <input type="range" min="80" max="500" value="80" class="slider" id="dutyRange1">
+        <p>Duty cycle: <span id="duty1"></span></p>
         <br>
         <h1>UP - DOWN</h1>
-        <input type="range" min="0" max="100" value="0" class="slider" id="dutyRange2">
-        <p>Duty cycle /4095: <span id="duty2"></span>%</p>
+        <input type="range" min="80" max="409" value="0" class="slider" id="dutyRange2">
+        <p>Duty cycle: <span id="duty2"></span></p>
         <br>
         <h1>BACKWARD - FORWARD</h1>
-        <input type="range" min="0" max="100" value="0" class="slider" id="dutyRange3">
-        <p>Duty cycle: <span id="duty3"></span>%</p>
+        <input type="range" min="205" max="409" value="0" class="slider" id="dutyRange3">
+        <p>Duty cycle: <span id="duty3"></span></p>
         <br>
         <h1>OPEN - CLOSE HAND</h1>
-        <input type="range" min="0" max="100" value="0" class="slider" id="dutyRange4">
-        <p>Duty cycle: <span id="duty4"></span>%</p>
+        <input type="range" min="80" max="300" value="80" class="slider" id="dutyRange4">
+        <p>Duty cycle: <span id="duty4"></span></p>
     </div>
 </body>
 <script>
 // servo 1
 var slider1 = document.getElementById("dutyRange1");
 var output1 = document.getElementById("duty1");
-output1.innerHTML = slider1.value;
+output1.innerHTML = slider1.value = 80;
 
 slider1.oninput = function () {
-    output1.innerHTML = (this.value *100 / 4095).toFixed(2);
+    output1.innerHTML = this.value;
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/slider1?value=" + slider1.value, true);
     xhr.send(slider1.value);
@@ -181,6 +181,6 @@ var xhttp = new XMLHttpRequest();
 setInterval(function () {
     xhttp.open("GET", "/robot", true);
     xhttp.send();
-}, 1000);// request 1 time / sec
+}, 1000);
 </script>
 </html>

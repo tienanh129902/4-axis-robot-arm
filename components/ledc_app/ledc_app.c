@@ -21,7 +21,7 @@ void LedC_Init(long freq)
         .timer_num = LEDC_TIMER_1,            // timer index
         .clk_cfg = LEDC_AUTO_CLK,             // Auto select the source clock
     };
-    // Set configuration of timer0 for high speed channels
+    // Set configuration of timer for high speed channels
     ledc_timer_config(&ledc_timer);
 }
 

@@ -116,15 +116,11 @@ static esp_err_t page_get_handler(httpd_req_t *req)
     // const char* resp_str = (const char*) "Hello World";
     httpd_resp_set_type(req, "text/html");
     httpd_resp_send(req, (const char *)index_html_start, index_html_end - index_html_start);
-    // httpd_resp_set_type(req, "text/css");
-    // httpd_resp_send(req, (const char *)style_css_start, style_css_end - style_css_start);
-    // httpd_resp_set_type(req, "text/js");
-    // httpd_resp_send(req, (const char *)main_js_start, main_js_end - main_js_start);
     return ESP_OK;
 }
 
 static const httpd_uri_t get_page = {
-    .uri = "/robot",
+    .uri = "/robot",    
     .method = HTTP_GET,
     .handler = page_get_handler,
     /* Let's pass response string in user
