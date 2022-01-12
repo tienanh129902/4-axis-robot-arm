@@ -98,7 +98,7 @@ void slider3_data_callback(char *data, int len)
     memcpy(number_str, data, len + 1);
     int duty3 = atoi(number_str);
     printf("Servo 3 get duty %d\n", duty3);
-    // LedC_Set_Duty(3,duty3);
+    LedC_Set_Duty(3,duty3);
 }
 
 void slider4_data_callback(char *data, int len)
@@ -125,8 +125,8 @@ void app_main(void)
 
     LedC_Init(50);
     LedC_Add_Pin(13,1);
-    LedC_Add_Pin(12,2);
-    // LedC_Add_Pin(1,3);
+    LedC_Add_Pin(33,2);
+    LedC_Add_Pin(25,3);  
     LedC_Add_Pin(27,4);
 
     esp_err_t ret = nvs_flash_init();
